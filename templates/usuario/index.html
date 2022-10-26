@@ -1,0 +1,15 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block titulo %} Filmix {% endblock titulo %}
+
+{% block main1 %}
+    <section id="banner" class="flex">
+        <div class="container">
+            <div class="card-banner">
+                <img src="{% static 'usuario/img/logo/logo_white_large.png' %}" alt="">
+                <h2>Los mejores estrenos en tu cine de confianza</h2>
+            </div>
+        </div>
+    </section>
+{% endblock main1 %}
