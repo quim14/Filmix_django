@@ -1,0 +1,20 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block titulo %} Filmix_Cartelera {% endblock titulo %}
+
+{% block main1 %}
+    <section id="peliculas-section">
+        <div class="container">
+            <div class="titulo">
+                <h1>Cartelera de hoy</h1>
+            </div>
+            <div class="peliculas"></div>
+        </div>
+    </section>
+
+    <script src="{% static 'usuario/js/cartelera.js' %}" defer></script>
+
+{% endblock main1 %}
+
+{% comment %} <script src="./js/cartelera.js"></script> {% endcomment %}

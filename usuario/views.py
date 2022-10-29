@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from usuario.formulario_registrarse import formulario_registro
+
 def index(request):
     return render(request, "usuario/index.html")
 
@@ -11,13 +13,24 @@ def cartelera(request):
     return render(request, "usuario/cartelera.html", {"peliculas_cartelera": peliculas_cartelera})
 
 def detalle_pelicula(request, pelicula):
-    return HttpResponse(f'''Pagina de la película {pelicula}''')
+    return render(request, "usuario/detalle_pelicula.html")
+
 
 def registrarse(request):
-    return HttpResponse("Pagina de registro")
+    mensaje = None
+    if(request.method == 'POST'):
+        formulario_1 = formulario_registro(request.POST)
+        # Aca agregar las acciones que deben hacerse al cargar el formulario
+        mensaje = "Registro realizado con éxito"
+    else:
+        formulario_1 = formulario_registro()
+
+    return render(request, "usuario/registrarse.html",
+    {'formulario_1':formulario_1, 'mensaje':mensaje} )
+    
 
 def inicio_sesion(request):
-    return HttpResponse("Pagina de inicio de sesión")
+    return render(request, "usuario/inicio_sesion.html")
 
 
 # Create your views here.

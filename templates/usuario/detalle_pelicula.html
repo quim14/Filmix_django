@@ -1,0 +1,16 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block titulo %} Filmix_Detalle {% endblock titulo %}
+
+{% block main1 %}
+    <section id="detalle-peliculas">
+        <div class="container">
+            <div class="volver">
+                <a href="{% url 'usuario/cartelera.html' %}"><i class="fa-solid fa-arrow-left"></i>Volver a cartelera</a>
+            </div>
+            <div class="detalle-grid">
+            </div>
+        </div>
+    </section>    
+{% endblock main1 %}

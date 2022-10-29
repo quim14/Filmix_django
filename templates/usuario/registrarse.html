@@ -1,0 +1,20 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block titulo %} Filmix_Registrarse {% endblock titulo %}
+
+{% block main1 %}
+
+<form action="{% url 'registrarse' %}" method="POST">
+    {% csrf_token %}
+
+    {% if mensaje %}
+        {{mensaje}}
+    {% endif %}
+
+    {{formulario_1}}
+    <button type="submit"> Registrarse </button>
+</form>
+
+
+{% endblock main1 %}
