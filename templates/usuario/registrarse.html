@@ -5,16 +5,31 @@
 
 {% block main1 %}
 
-<form action="{% url 'registrarse' %}" method="POST">
-    {% csrf_token %}
+    <div class="container">
 
-    {% if mensaje %}
-        {{mensaje}}
-    {% endif %}
+        <form action="{% url 'registrarse' %}" novalidate method="POST" id="form-registrar">
+            <div class="container-form">
+                <img src="{% static 'usuario/img/logo/logo_vertical.png' %}" class="logo-form" alt="">
 
-    {{formulario_1}}
-    <button type="submit"> Registrarse </button>
-</form>
+                {% csrf_token %}
+
+                {% if mensaje %}
+                
+                <div class="alerta-1">
+                    {{mensaje}}
+                </div>
+
+                {% endif %}
+
+                {{formulario_1}}
+
+                <button type="submit" class="btn-form"> Registrarse </button>
+
+                <p>Al registrarte, aceptas nuestras condiciones de uso y política de privacidad.</p>
+                <p>¿Ya tienes una cuenta? <a href="{% url 'inicio_sesion' %}" class="link-form">Iniciar sesión</a></p>
+            </div>
+        </form>
+    </div>
 
 
 {% endblock main1 %}

@@ -249,6 +249,18 @@ input[type="email"]
     color: black;
 }
 
+.alerta-1{
+    border: none;
+    width: 100%;
+    color: white;
+    background: #2D776C;
+    font-size: 20px;
+    padding: 15px 20px;
+    border: 5px;
+    color: red;
+}
+
+
 /* --------- CARTELERA --------- */
 .titulo{
     color: white;

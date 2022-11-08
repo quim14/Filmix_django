@@ -20,8 +20,12 @@ def registrarse(request):
     mensaje = None
     if(request.method == 'POST'):
         formulario_1 = formulario_registro(request.POST)
-        # Aca agregar las acciones que deben hacerse al cargar el formulario
-        mensaje = "Registro realizado con éxito"
+        if(formulario_1.is_valid()):
+
+            # Aca agregar las acciones que deben hacerse al cargar el formulario
+            mensaje = "Registro realizado con éxito"
+        else:
+            mensaje = "Error al completar el formulario"
     else:
         formulario_1 = formulario_registro()
 
