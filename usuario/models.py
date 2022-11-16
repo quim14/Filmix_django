@@ -9,7 +9,7 @@ class usuario(models.Model):
     contraseña = models.CharField(max_length=100, verbose_name='Contraseña')
 
 
-class pelicula(models.Model):
+""" class pelicula(models.Model):
     nombre = models.CharField(max_length=100, verbose_name='Nombre')
     # imagen = models.ImageField(verbose_name='Imagen')
     fecha_ini = models.DateField(verbose_name='Fecha de Inicio')
@@ -19,7 +19,7 @@ class pelicula(models.Model):
     descripcion = models.TextField(verbose_name='Descripcion')
     trailer = models.SlugField(verbose_name='Trailer')
     
-
+ """
 
 """ var pelicula_0 = {
     id: 1,
