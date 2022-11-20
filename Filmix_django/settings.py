@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuario',
+    'administracion',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'filmix_django',
         'USER': 'postgres',
-        'PASSWORD': 'filmix_1234',
+        # 'PASSWORD': 'filmix_1234',
+        'PASSWORD': 'Quim1402',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
