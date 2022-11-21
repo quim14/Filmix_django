@@ -7,6 +7,18 @@ class usuario(models.Model):
     apellido = models.CharField(max_length=100, verbose_name='Apellido')
     mail = models.EmailField(verbose_name='Email')
     contraseña = models.CharField(max_length=100, verbose_name='Contraseña')
+    baja = models.BooleanField(default=0)
+
+    def __str__(self):
+        return self.nombre
+
+    def soft_delete(self):
+        self.baja = True
+        super().save()
+
+    def restore(self):
+        self.baja = False
+        super().save()
 
 
 """ class pelicula(models.Model):

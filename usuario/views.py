@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from usuario.formulario_registrarse import formulario_registro
+from usuario.models import usuario
 
 def index(request):
     return render(request, "usuario/index.html")
@@ -21,6 +22,13 @@ def registrarse(request):
     if(request.method == 'POST'):
         formulario_1 = formulario_registro(request.POST)
         if(formulario_1.is_valid()):
+            nombre = formulario_1.cleaned_data['nombre']
+            apellido = formulario_1.cleaned_data['apellido']
+            mail = formulario_1.cleaned_data['mail']
+            contraseña = formulario_1.cleaned_data['contraseña_1']
+            nuevo_usuario = usuario(nombre=nombre, apellido=apellido, mail=mail, contraseña=contraseña)
+            nuevo_usuario.save()
+            
 
             # Aca agregar las acciones que deben hacerse al cargar el formulario
             mensaje = "Registro realizado con éxito"
