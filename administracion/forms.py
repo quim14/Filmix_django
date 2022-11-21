@@ -15,16 +15,32 @@ class PeliculaForm(forms.Form):
             'rows': 5,
         }))
     trailer = forms.CharField(
-        label='Trailer', 
+        label='URL del Trailer', 
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'URL de Youtube del trailer',
+            'placeholder': 'Ej: https://www.youtube.com/embed/...',
         }))
     imagen = forms.FileField(
         label='Poster',
         widget=forms.ClearableFileInput(attrs={
             'class': 'form-control form-control-sm'
         }))
+
+
+class FuncionesForm(forms.Form):
+    fecha = forms.DateField(
+        label='Fecha',
+        widget=forms.DateInput(attrs={'class':'form-control', 'type':'date'})
+    )
+    horario = forms.TimeField(
+        label='Horario',
+        widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'})
+    )
+    cantidad = forms.CharField(
+        label='Cantidad',
+        widget=forms.NumberInput(attrs={'class':'form-control', 'max':'10', 'min':'0'})
+    )
+
 
 
 
