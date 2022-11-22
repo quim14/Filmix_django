@@ -1,0 +1,68 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block titulo %} Funciones {% endblock titulo %}
+
+{% block main %}
+    <section id="section_peliculas">
+        <div class="container row justify-content-center">
+            <div class="titulo">
+                <h1>Funciones</h1>
+            </div>
+            <div class="row col-sm-10 card mb-5 py-3">
+                <form action="{% url 'funciones' %}" id="form_funciones" name="form_funciones" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="col-sm">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Fecha:</label>
+                            {{funciones_form.fecha}}
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Horario:</label>
+                            {{funciones_form.horario}}
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Cantidad:</label>
+                            {{funciones_form.cantidad}}
+                        </div>
+                    </div>
+                    {% comment %} <div class="row justify-content-md-center">
+                        <div class="col-sm">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Nombre:</label>
+                                {{pelicula_form.nombre}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Descripcion:</label>
+                                {{pelicula_form.descripcion}}
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Trailer:</label>
+                                {{pelicula_form.trailer}}
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class= "mb-3">
+                                <label for="" class="form-label">Poster:</label>
+                                {{pelicula_form.imagen}}
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static 'usuario/js/cartelera.js' %}" defer></script>
+
+{% endblock main %}
+
+{% comment %} <script src="./js/cartelera.js"></script> {% endcomment %}
