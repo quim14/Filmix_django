@@ -1,0 +1,41 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block titulo %} Peliculas {% endblock titulo %}
+
+{% block main %}
+    <section id="section_peliculas">
+        <div class="container row justify-content-center">
+            <div class="titulo">
+                <h1>Peliculas</h1>
+            </div>
+            <div class="row col-sm-10 card mb-5">
+                <a name="" id="" class="btn btn-success" href="{% url 'peliculas_agregar' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pelicula in peliculas %}
+                            <tr>
+                                <td>{{pelicula.id}}</td>
+                                <td>{{pelicula.nombre}}</td>
+                                <td>
+                                    <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
+                                    <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock main %}
+
+{% comment %} <script src="./js/cartelera.js"></script> {% endcomment %}
