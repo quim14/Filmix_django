@@ -28,10 +28,20 @@
             <ul class="nav-links">
                 <li><a href="{% url 'index' %}">Inicio</a></li>
                 <li><a href="{% url 'cartelera' %}">Cartelera</a></li>
+
+                {% if user.is_authenticated %}
+                <li> Bienvenido/a, {{user.username}} </li>
+                <li>
+                    <a href="{% url 'logout' %}" class="btn-inicio"><button>Cerrar sesión</button></a>
+                </li>
+                
+                {% else %}
                 <li><a href="{% url 'registrarse' %}">Registrarse</a></li>
                 <li>
                     <a href="{% url 'inicio_sesion' %}" class="btn-inicio"><button>Iniciar sesión</button></a>
                 </li>
+                {% endif %}
+
             </ul>
             <span class="btn-menu">
                 <i class="fa-solid fa-bars"></i>
