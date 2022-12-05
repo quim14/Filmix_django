@@ -24,8 +24,8 @@
                                 <td>{{pelicula.id}}</td>
                                 <td>{{pelicula.nombre}}</td>
                                 <td>
-                                    <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
-                                    <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    {% comment %} <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
+                                    <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
                                 </td>
                             </tr>
                         {% endfor %}

@@ -25,3 +25,4 @@ class Pelicula(models.Model):
     def restore(self):
         self.baja=False
         super().save()
+    
