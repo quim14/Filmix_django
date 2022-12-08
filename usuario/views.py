@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from usuario.formulario_registrarse import formulario_registro
 from usuario.models import usuario
 
@@ -42,7 +44,18 @@ def registrarse(request):
     
 
 def inicio_sesion(request):
-    return render(request, "usuario/inicio_sesion.html")
+    if(request.method == 'POST'):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not NONE:
+            login(request, user)
+            return redirect('index')
+        else:
+            message.error(request, f'Cuenta o contraseña incorrecto')
+    form = AuthenticationForm()
+    return render(request, "usuario/inicio_sesion.html", {'form':form})
+
 
 
 # Create your views here.
