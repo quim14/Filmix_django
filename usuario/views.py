@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+
+
+
 from usuario.formulario_registrarse import formulario_registro
-from usuario.models import usuario
+
 
 def index(request):
     return render(request, "usuario/index.html")
@@ -20,6 +24,47 @@ def detalle_pelicula(request, pelicula):
 
 
 def registrarse(request):
+    mensaje_exito = None
+    mensaje_error = None
+    if request.method == 'POST':
+        formulario_1 = formulario_registro(request.POST)
+        if formulario_1.is_valid():
+            formulario_1.save()
+            mensaje_exito = "Registro realizado con éxito"
+        else:
+            mensaje_error = "Error al completar el formulario"
+    else:
+        formulario_1 = formulario_registro()
+
+    return render(request, "usuario/registrarse.html",
+    {'formulario_1':formulario_1, 'mensaje_exito':mensaje_exito, 'mensaje_error':mensaje_error} )
+    
+
+def inicio_sesion(request):
+    if(request.method == 'POST'):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            nxt = request.GET.get('next', None)
+            if nxt is None:
+                return redirect('index')
+            else:
+                return redirect(nxt)
+        else:
+            messages.error(request, f'Cuenta o contraseña incorrecto')
+    form = AuthenticationForm()
+    return render(request, "usuario/inicio_sesion.html", {'form':form})
+
+
+
+# Create your views here.
+
+
+# ------------SUPERADO------------
+
+""" def registrarse(request):
     mensaje = None
     if(request.method == 'POST'):
         formulario_1 = formulario_registro(request.POST)
@@ -40,22 +85,4 @@ def registrarse(request):
         formulario_1 = formulario_registro()
 
     return render(request, "usuario/registrarse.html",
-    {'formulario_1':formulario_1, 'mensaje':mensaje} )
-    
-
-def inicio_sesion(request):
-    if(request.method == 'POST'):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not NONE:
-            login(request, user)
-            return redirect('index')
-        else:
-            message.error(request, f'Cuenta o contraseña incorrecto')
-    form = AuthenticationForm()
-    return render(request, "usuario/inicio_sesion.html", {'form':form})
-
-
-
-# Create your views here.
+    {'formulario_1':formulario_1, 'mensaje':mensaje} ) """

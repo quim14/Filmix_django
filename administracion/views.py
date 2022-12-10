@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from administracion.forms import PeliculaForm
 from administracion.models import Pelicula
 
@@ -8,10 +10,12 @@ from administracion.models import Pelicula
 
 
 ########### P E L I C U L A S ##############
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_index(request):
     peliculas = Pelicula.objects.filter(baja=False)
     return render(request, "administracion/peliculas/peliculas.html", {'peliculas':peliculas})
 
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_agregar(request):
     if (request.method == 'POST'):
         pelicula_form = PeliculaForm(request.POST)
@@ -35,6 +39,7 @@ def peliculas_agregar(request):
 
 
 #################################
+@login_required(login_url=settings.LOGIN_URL)
 def funciones(request):
     if (request.method == 'POST'):
         funciones_form = FuncionesForm(request.POST)

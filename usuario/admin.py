@@ -1,5 +1,6 @@
 from django.contrib import admin
-from usuario.models import usuario
+
+""" from usuario.models import usuario
 
 
 # Register your models here.
@@ -12,3 +13,4 @@ class usuarioAdmin(admin.ModelAdmin):
     list_filter = ('baja',)
 
 admin.site.register(usuario, usuarioAdmin)
+ """

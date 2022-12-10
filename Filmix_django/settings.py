@@ -136,3 +136,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'static_root'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = '/usuario/inicio_sesion/'

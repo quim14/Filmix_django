@@ -249,11 +249,22 @@ input[type="email"]
     color: black;
 }
 
+.exito-1{
+    border: none;
+    width: 100%;
+    color: white;
+    background: #CDEAB9;
+    font-size: 20px;
+    padding: 15px 20px;
+    border: 5px;
+    color: green;
+}
+
 .alerta-1{
     border: none;
     width: 100%;
     color: white;
-    background: #2D776C;
+    background: #FBCCD8;
     font-size: 20px;
     padding: 15px 20px;
     border: 5px;

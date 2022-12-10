@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class usuario(models.Model):
+""" class usuario(models.Model):
     nombre = models.CharField(max_length=100, verbose_name='Nombre')
     apellido = models.CharField(max_length=100, verbose_name='Apellido')
     mail = models.EmailField(verbose_name='Email')
@@ -20,7 +20,8 @@ class usuario(models.Model):
         self.baja = False
         super().save()
 
-
+ """
+ 
 """ class pelicula(models.Model):
     nombre = models.CharField(max_length=100, verbose_name='Nombre')
     # imagen = models.ImageField(verbose_name='Imagen')

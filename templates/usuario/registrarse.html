@@ -13,10 +13,18 @@
 
                 {% csrf_token %}
 
-                {% if mensaje %}
+                {% if mensaje_exito %}
+                
+                <div class="exito-1">
+                    {{mensaje_exito}}
+                </div>
+
+                {% endif %}
+
+                {% if mensaje_error %}
                 
                 <div class="alerta-1">
-                    {{mensaje}}
+                    {{mensaje_error}}
                 </div>
 
                 {% endif %}

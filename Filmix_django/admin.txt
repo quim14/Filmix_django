@@ -1,2 +1,10 @@
 Usuario: rd.grande
 Pass: filmix_1234
+
+usuario de prueba
+Usuario: test_1
+Pass: filmix_1234
+
+admin de prueba
+Usuario: test_admin
+Pass: filmix_1234

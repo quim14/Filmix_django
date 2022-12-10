@@ -1,9 +1,39 @@
 from django import forms
-from django import forms
 from django.forms import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+class formulario_registro(UserCreationForm):
+
+    username = forms.CharField(label=False, required=True, max_length=100, 
+                            error_messages={'required':'Por favor complete su usuario'},
+                            widget=forms.TextInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su usuario'} ))
+    first_name = forms.CharField(label=False, required=True, max_length=100, 
+                            error_messages={'required':'Por favor complete su nombre'},
+                            widget=forms.TextInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su nombre'} ))
+    last_name = forms.CharField(label=False, required=True, max_length=100, 
+                            error_messages={'required':'Por favor complete su apellido'},
+                            widget=forms.TextInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su apellido'} ))
+    email = forms.EmailField(label=False, required=True,
+                            error_messages={'required':'Por favor complete su Email'},
+                            widget=forms.EmailInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su Email'} ))
+    password1  = forms.CharField(label=False, required=True, max_length=100,
+                            error_messages={'required':'Por favor ingrese su contraseña'},
+                            widget=forms.PasswordInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su contraseña'} ))
+    password2  = forms.CharField(label=False, required=True, max_length=100,
+                            error_messages={'required':'Por favor ingrese su contraseña'},
+                            widget=forms.PasswordInput(attrs={'class':'cont-input', 'placeholder':'Ingrese nuevamente su contraseña'} ))
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
-class formulario_registro(forms.Form):
+
+# ------------SUPERADO------------
+
+
+""" class formulario_registro(forms.Form):
     nombre = forms.CharField(label=False, required=True, max_length=100, 
                             error_messages={'required':'Por favor complete su nombre'},
                             widget=forms.TextInput(attrs={'class':'cont-input', 'placeholder':'Ingrese su nombre'} ))
@@ -31,3 +61,4 @@ class formulario_registro(forms.Form):
             raise forms.ValidationError(
                 "Las contraseñas ingresadas no coinciden"
             )
+ """
