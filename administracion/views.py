@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from administracion.forms import PeliculaForm
 from administracion.models import Pelicula
+from administracion.models import Funcion
 
 
 # Create your views here.
@@ -15,14 +16,13 @@ def peliculas_index(request):
 def peliculas_agregar(request):
     if (request.method == 'POST'):
         pelicula_form = PeliculaForm(request.POST)
-        if pelicula_form.is_valid():
-            nueva_pelicula = Pelicula()
-            nueva_pelicula.nombre = pelicula_form.cleaned_data['nombre']
-            nueva_pelicula.descripcion = pelicula_form.cleaned_data['descripcion']
-            nueva_pelicula.trailer = pelicula_form.cleaned_data['trailer']
-            nueva_pelicula.estado = 'D'
-            nueva_pelicula.poster = 'C:'
-            nueva_pelicula.save()
+        # if pelicula_form.is_valid():
+        nombre = request.POST['nombre']
+        descripcion = request.POST['descripcion']
+        trailer = request.POST['trailer']
+        poster = request.FILES['poster']
+        nueva_pelicula = Pelicula(nombre=nombre, descripcion=descripcion, trailer=trailer, poster=poster)
+        nueva_pelicula.save()
         return redirect('peliculas')
     
     else:
@@ -34,13 +34,18 @@ def peliculas_agregar(request):
 
 
 
-#################################
+################## FUNCIONES ###################
 def funciones(request):
-    if (request.method == 'POST'):
-        funciones_form = FuncionesForm(request.POST)
+    # if (request.method == 'POST'):
+    #     funciones_form = FuncionesForm(request.POST)
     
-    else:
-        funciones_form = FuncionesForm()
-    return render(request, "administracion/funciones.html", {
-    'funciones_form': funciones_form,
+    # else:
+    #     funciones_form = FuncionesForm()
+    funciones = Funcion.objects.all().order_by('-fecha')
+    return render(request, "administracion/funciones/index.html", {'funciones': funciones,})
+
+
+def funciones_agregar(request):
+    return render(request, "administracion/funciones/agregar_funcion.html", {
+        'pelicula_form':'pelicula_form',
     })
