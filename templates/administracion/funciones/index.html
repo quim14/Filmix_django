@@ -1,34 +1,36 @@
 {% extends 'administracion/base.html' %}
 {% load static %}
 
-{% block titulo %} Peliculas {% endblock titulo %}
+{% block titulo %} Funciones {% endblock titulo %}
 
 {% block main %}
-    <section id="section_peliculas">
+    <section>
         <div class="container row justify-content-center">
             <div class="titulo">
-                <h1>Peliculas</h1>
+                <h1>Funciones</h1>
             </div>
             <div class="row col-sm-10 card mb-5">
-                <a name="" id="" class="btn btn-success" href="{% url 'peliculas_agregar' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                <a name="" id="" class="btn btn-success" href="{% url 'funciones_agregar' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>                
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
+                            <th>Dia</th>
+                            <th>Pelicula</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for pelicula in peliculas %}
+                        {% for funcion in funciones %}
+                            {% for pelicula in  funcion.peliculas%}
                             <tr>
-                                <td>{{pelicula.id}}</td>
+                                <td>{{funcion.fecha}}</td>
                                 <td>{{pelicula.nombre}}</td>
                                 <td>
                                     {% comment %} <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
                                     <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
                                 </td>
                             </tr>
+                            {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
