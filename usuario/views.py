@@ -3,19 +3,15 @@ from django.http import HttpResponse
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
-
-
 
 from usuario.formulario_registrarse import formulario_registro
+from usuario.formulario_login import formulario_login
 
 
 def index(request):
     return render(request, "usuario/index.html")
 
 def cartelera(request):
-    '''La variable peliculas_cartelera podria ser una lista que traiga diccionarios en donde se indique la información de las 
-    películas que están en cartelera'''
     peliculas_cartelera = []
     return render(request, "usuario/cartelera.html", {"peliculas_cartelera": peliculas_cartelera})
 
@@ -41,6 +37,7 @@ def registrarse(request):
     
 
 def inicio_sesion(request):
+    mensaje_login = None
     if(request.method == 'POST'):
         username = request.POST['username']
         password = request.POST['password']
@@ -53,9 +50,10 @@ def inicio_sesion(request):
             else:
                 return redirect(nxt)
         else:
-            messages.error(request, f'Cuenta o contraseña incorrecto')
-    form = AuthenticationForm()
-    return render(request, "usuario/inicio_sesion.html", {'form':form})
+            mensaje_login = "Usuario o contraseña incorrecto"
+            """ messages.error(request, f'Cuenta o contraseña incorrecto') """
+    form = formulario_login()
+    return render(request, "usuario/inicio_sesion.html", {'form':form, 'mensaje':mensaje_login})
 
 
 

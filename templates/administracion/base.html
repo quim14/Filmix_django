@@ -29,9 +29,9 @@
             <ul class="nav-links">
                 <li><a href="{% url 'peliculas' %}">Peliculas</a></li>
                 <li><a href="{% url 'funciones' %}">Funciones</a></li>
-                <li><a href="{% url 'registrarse' %}">Registrarse</a></li>
+                <li> Bienvenido/a, {{user.username}} </li>
                 <li>
-                    <a href="{% url 'inicio_sesion' %}" class="btn-inicio"><button>Iniciar sesión</button></a>
+                    <a href="{% url 'logout' %}" class="btn-inicio"><button>Cerrar sesión</button></a>
                 </li>
             </ul>
             <span class="btn-menu">
@@ -71,7 +71,7 @@
         </div>
         <div class="foot-fin">
             <div class="copyright link-footer">
-                © Todos los Derechos Reservados | <a href="">Quimey</a>
+                © Todos los Derechos Reservados | <a href="">Quimey Yomar - Ramiro Grande</a>
             </div>
             <div class="information link-footer">
                 <a href=""> Información compañía </a>|

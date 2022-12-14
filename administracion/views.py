@@ -13,11 +13,15 @@ from administracion.models import Funcion
 ########### P E L I C U L A S ##############
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_index(request):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     peliculas = Pelicula.objects.filter(baja=False)
     return render(request, "administracion/peliculas/peliculas.html", {'peliculas':peliculas})
 
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_agregar(request):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     if (request.method == 'POST'):
         pelicula_form = PeliculaForm(request.POST)
         # if pelicula_form.is_valid():
@@ -41,6 +45,8 @@ def peliculas_agregar(request):
 #################################
 @login_required(login_url=settings.LOGIN_URL)
 def funciones(request):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     # if (request.method == 'POST'):
     #     funciones_form = FuncionesForm(request.POST)
     
@@ -51,6 +57,8 @@ def funciones(request):
 
 
 def funciones_agregar(request):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     return render(request, "administracion/funciones/agregar_funcion.html", {
         'pelicula_form':'pelicula_form',
     })
