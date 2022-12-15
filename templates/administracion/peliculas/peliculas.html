@@ -16,6 +16,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            {% comment %} <th>Poster</th> {% endcomment %}
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -24,9 +25,10 @@
                             <tr>
                                 <td>{{pelicula.id}}</td>
                                 <td>{{pelicula.nombre}}</td>
+                                {% comment %} <td><img src="..{{pelicula.poster.url}}" alt="">/../..{{pelicula.poster.url}}</td> {% endcomment %}
                                 <td>
-                                    {% comment %} <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
-                                    <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
+                                    <a href="{% url 'peliculas_editar' pelicula.id %}" title="Editar" class="btn btn-primary"><i class="fas fa-pencil"></i></a>
+                                    <a href="{% url 'peliculas_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

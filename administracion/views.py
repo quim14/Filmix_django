@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from administracion.forms import PeliculaForm
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from administracion.forms import PeliculaForm, PeliculaFormValidado, FuncionesForm
 from administracion.models import Pelicula
 from administracion.models import Funcion
 
@@ -9,10 +11,12 @@ from administracion.models import Funcion
 
 
 ########### P E L I C U L A S ##############
+#@login_required(login_url=settings.LOGIN_URL)
 def peliculas_index(request):
     peliculas = Pelicula.objects.filter(baja=False)
     return render(request, "administracion/peliculas/peliculas.html", {'peliculas':peliculas})
 
+#@login_required(login_url=settings.LOGIN_URL)
 def peliculas_agregar(request):
     if (request.method == 'POST'):
         pelicula_form = PeliculaForm(request.POST)
@@ -23,6 +27,7 @@ def peliculas_agregar(request):
         poster = request.FILES['poster']
         nueva_pelicula = Pelicula(nombre=nombre, descripcion=descripcion, trailer=trailer, poster=poster)
         nueva_pelicula.save()
+        # pelicula_form.save()
         return redirect('peliculas')
     
     else:
@@ -32,20 +37,68 @@ def peliculas_agregar(request):
     })
 
 
+#@login_required(login_url=settings.LOGIN_URL)
+def peliculas_editar(request, id_pelicula):
+    try:
+        pelicula = Pelicula.objects.get(pk = id_pelicula)
+    except Pelicula.DoesNotExist:
+        return render(request, 'administracion/peliculas/peliculas.html')
+    if (request.method == 'POST'):
+        pelicula_form = PeliculaFormValidado(request.POST, instance=pelicula)
+        # if pelicula_form.is_valid():
+        # pelicula_form.save()
+        nombre = request.POST['nombre']
+        descripcion = request.POST['descripcion']
+        trailer = request.POST['trailer']
+        #poster = request.FILES['poster']
+        pelicula.nombre = nombre
+        pelicula.descripcion = descripcion
+        pelicula.trailer = trailer
+        pelicula.save()
 
-
-################## FUNCIONES ###################
-def funciones(request):
-    # if (request.method == 'POST'):
-    #     funciones_form = FuncionesForm(request.POST)
+        return redirect('peliculas')
     
-    # else:
-    #     funciones_form = FuncionesForm()
+    else:
+        pelicula_form = PeliculaForm(instance=pelicula)
+    return render(request, "administracion/peliculas/editar.html", {
+        'pelicula_form':pelicula_form,
+    })
+
+#@login_required(login_url=settings.LOGIN_URL)
+def peliculas_eliminar(request, id_pelicula):
+    try:
+        pelicula = Pelicula.objects.get(pk=id_pelicula)
+    except Pelicula.DoesNotExist:
+        return render(request, 'administracion/peliculas/peliculas.html')
+    pelicula.soft_delete()
+    return redirect('peliculas')
+
+
+# class PeliculasListView(ListView)
+
+#################################
+#@login_required(login_url=settings.LOGIN_URL)
+def funciones(request):
     funciones = Funcion.objects.all().order_by('-fecha')
     return render(request, "administracion/funciones/index.html", {'funciones': funciones,})
 
-
+#@login_required(login_url=settings.LOGIN_URL)
 def funciones_agregar(request):
+    if (request.method == 'POST'):
+        funcion_form = FuncionesForm(request.POST)
+        # if funcion_form.is_valid():
+        fecha = request.POST['fecha']
+        pelicula = request.POST['pelicula']
+        try:
+            pelicula = Pelicula.objects.get(pk=pelicula)
+        except Pelicula.DoesNotExist:
+            return render(request, 'administracion/funciones/index.html')
+        nueva_funcion = Funcion(fecha=fecha, pelicula=pelicula)
+        nueva_funcion.save()
+        return redirect('funciones')
+    
+    else:
+        funcion_form = FuncionesForm()
     return render(request, "administracion/funciones/agregar_funcion.html", {
-        'pelicula_form':'pelicula_form',
+        'funcion_form':funcion_form,
     })

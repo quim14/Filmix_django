@@ -21,23 +21,57 @@
                     </thead>
                     <tbody>
                         {% for funcion in funciones %}
-                            {% for pelicula in  funcion.peliculas%}
                             <tr>
                                 <td>{{funcion.fecha}}</td>
-                                <td>{{pelicula.nombre}}</td>
+                                <td>{{funcion.pelicula}}</td>
                                 <td>
-                                    {% comment %} <a href="{% url 'pelicula_editar' pelicula.id %}" title="Editar" class="btn btn-info"><i class="fas fa-pencil"></i></a>
-                                    <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
+                                    <button class="btn btn-warning btn-sm" title="Ver horarios"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn btn-primary btn-sm" title="Agregar horario"><i class="fa-solid fa-clock"></i></button>
+                                    {% comment %} <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
                                 </td>
                             </tr>
-                            {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-
+    <div class="modal" tabindex="-1" id="modal_peliculas">
+        <div class="modal-dialog  modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Seleccione una pelicula</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Pelicula</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% comment %} {% for pelicula in peliculas %}
+                                <tr>
+                                    <td>{{pelicula.id}}</td>
+                                    <td>{{pelicula.nombre}}</td>
+                                    <td>
+                                        <button class="btn btn-success btn-sm" onclick="seleccionarPeli('{{pelicula.id}}', '{{pelicula.nombre}}');"><i class="fa-solid fa-check"></i></button>
+                                    </td>
+                                </tr>
+                            {% endfor %} {% endcomment %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 {% endblock main %}
 
