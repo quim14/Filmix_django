@@ -1,39 +1,47 @@
 {% extends 'administracion/base.html' %}
 {% load static %}
 
-{% block titulo %} Funciones {% endblock titulo %}
+{% block titulo %} Horarios {% endblock titulo %}
 
 {% block main %}
     <section>
         <div class="container row justify-content-center">
             <div class="titulo">
-                <h1>Funciones</h1>
+                <h1>Horarios</h1>
             </div>
-            <div class="row col-sm-10 card mb-5">
-                <a name="" id="" class="btn btn-success" href="{% url 'funciones_agregar' %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>                
+            <div class="row col-sm-6 card mb-5 d-flex justify-content-center">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Dia</th>
                             <th>Pelicula</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for funcion in funciones %}
-                            <tr>
-                                <td>{{funcion.fecha}}</td>
-                                <td>{{funcion.pelicula}}</td>
-                                <td>
-                                    <a href="{% url 'horarios_agregar' funcion.id %}" class="btn btn-primary btn-sm" title="Agregar horario"><i class="fa-solid fa-clock"></i></a>
-                                    <a href="{% url 'horarios' funcion.id %}" class="btn btn-info btn-sm" title="Ver horarios"><i class="fa-solid fa-eye"></i></a>
-                                    {% comment %} <a href="{% url 'horarios_agregar' funcion.id %}" class="btn btn-primary btn-sm" title="Agregar horario"><i class="fa-solid fa-clock"></i></a> {% endcomment %}
-                                    {% comment %} <a href="{% url 'pelicula_eliminar' pelicula.id %}" title="Eliminar" class="btn btn-danger"><i class="fas fa-trash"></i></a> {% endcomment %}
-                                </td>
-                            </tr>
-                        {% endfor %}
+                        <tr>
+                            <td>{{funcion.fecha}}</td>
+                            <td>{{funcion.pelicula}}</td>
+                        </tr>
                     </tbody>
                 </table>
+        
+                <div class="row col-sm-6 card mb-5">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hora in horas %}
+                                <tr>
+                                    <td>{{hora.hora}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <a name="" id="" class="btn btn-success" href="{% url 'horarios_agregar' funcion.id %}" role="button"> <i class="fa-solid fa-circle-plus"></i> Nuevo</a>                
+                </div>
             </div>
         </div>
     </section>

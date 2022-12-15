@@ -25,8 +25,26 @@ class Pelicula(models.Model):
 class Funcion(models.Model):
     fecha = models.DateField(verbose_name='Fecha', default=date.today())
     pelicula = models.ForeignKey(Pelicula, on_delete=models.RESTRICT, related_name='peliculas')
+    # baja = models.BooleanField(default=0)
+
+    # def soft_delete(self):
+    #     self.baja=True
+    #     super().save()
+    
+    # def restore(self):
+    #     self.baja=False
+    #     super().save()
 
 
 class Horario(models.Model):
     hora = models.TimeField(auto_now=False, auto_now_add=False ,verbose_name='Hora')
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE, related_name='horarios')
+    # baja = models.BooleanField(default=0)
+
+    # def soft_delete(self):
+    #     self.baja=True
+    #     super().save()
+    
+    # def restore(self):
+    #     self.baja=False
+    #     super().save()

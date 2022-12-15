@@ -1,0 +1,38 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block titulo %} Editar horario {% endblock titulo %}
+
+{% block main %}
+<section class="d-flex justify-content-center">
+    <div class="row col-sm-5 card mb-5">
+        <h3 class="text-center mt-3">Editar horario</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Pelicula</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{funcion.fecha}}</td>
+                    <td>{{funcion.pelicula}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %} {% include "administracion/peliculas/form.html" %} {% endcomment %}
+            {{horario_form}}
+            <hr>
+            <div class="d-flex justify-content-center  mb-3">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+{% endblock main %}
