@@ -5,3 +5,6 @@ usuario/__pycache__
 usuario/migrations/__pycache__
 administracion/migrations/__pycache__
 usuario/__pycache__/views.cpython-310.pyc
+usuario/__pycache__/formulario_registrarse.cpython-310.pyc
+usuario/__pycache__/urls.cpython-310.pyc
+usuario/__pycache__/views.cpython-310.pyc

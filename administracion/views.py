@@ -59,15 +59,6 @@ def peliculas_editar(request, id_pelicula):
         pelicula.descripcion = descripcion
         pelicula.trailer = trailer
         pelicula.save()
-
-
-#################################
-#@login_required(login_url=settings.LOGIN_URL)
-def funciones(request):
-    if not request.user.groups.filter(name="administracion").exists():
-        return render(request,'usuario/index.html')
-    # if (request.method == 'POST'):
-    #     funciones_form = FuncionesForm(request.POST)
         return redirect('peliculas')
     
     else:
@@ -75,6 +66,21 @@ def funciones(request):
     return render(request, "administracion/peliculas/editar.html", {
         'pelicula_form':pelicula_form,
     })
+
+
+#################################
+# def funciones(request):
+#     if not request.user.groups.filter(name="administracion").exists():
+#         return render(request,'usuario/index.html')
+#     # if (request.method == 'POST'):
+#     #     funciones_form = FuncionesForm(request.POST)
+#         return redirect('peliculas')
+    
+#     else:
+#         pelicula_form = PeliculaForm(instance=pelicula)
+#     return render(request, "administracion/peliculas/editar.html", {
+#         'pelicula_form':pelicula_form,
+#     })
 
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_eliminar(request, id_pelicula):
@@ -96,8 +102,8 @@ def funciones(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def funciones_agregar(request):
-    if not request.user.groups.filter(name="administracion").exists():
-        return render(request,'usuario/index.html')
+    # if not request.user.groups.filter(name="administracion").exists():
+    #     return render(request,'usuario/index.html')
     if (request.method == 'POST'):
         funcion_form = FuncionesForm(request.POST)
         # if funcion_form.is_valid():
