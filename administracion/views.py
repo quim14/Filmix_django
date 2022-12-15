@@ -11,12 +11,12 @@ from administracion.models import Funcion, Horario
 
 
 ########### P E L I C U L A S ##############
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_index(request):
     peliculas = Pelicula.objects.filter(baja=False)
     return render(request, "administracion/peliculas/peliculas.html", {'peliculas':peliculas})
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_agregar(request):
     if (request.method == 'POST'):
         pelicula_form = PeliculaForm(request.POST)
@@ -37,7 +37,7 @@ def peliculas_agregar(request):
     })
 
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_editar(request, id_pelicula):
     try:
         pelicula = Pelicula.objects.get(pk = id_pelicula)
@@ -64,7 +64,7 @@ def peliculas_editar(request, id_pelicula):
         'pelicula_form':pelicula_form,
     })
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def peliculas_eliminar(request, id_pelicula):
     try:
         pelicula = Pelicula.objects.get(pk=id_pelicula)
@@ -77,12 +77,12 @@ def peliculas_eliminar(request, id_pelicula):
 # class PeliculasListView(ListView)
 
 #################################
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def funciones(request):
     funciones = Funcion.objects.all().order_by('-fecha')
     return render(request, "administracion/funciones/index.html", {'funciones': funciones,})
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def funciones_agregar(request):
     if (request.method == 'POST'):
         funcion_form = FuncionesForm(request.POST)
@@ -103,7 +103,7 @@ def funciones_agregar(request):
         'funcion_form':funcion_form,
     })
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def horarios_agregar(request, id_funcion):
     try:
         funcion = Funcion.objects.get(pk=id_funcion)
@@ -125,7 +125,7 @@ def horarios_agregar(request, id_funcion):
     })
 
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def horarios(request, id_funcion):
     try:
         funcion = Funcion.objects.get(pk=id_funcion)
@@ -136,7 +136,7 @@ def horarios(request, id_funcion):
         'funcion':funcion, 'horas':horas,
     })
 
-#@login_required(login_url=settings.LOGIN_URL)
+@login_required(login_url=settings.LOGIN_URL)
 def horarios_editar(request, id_funcion, id_horario):
     try:
         hora = Horario.objects.get(pk = id_horario)
