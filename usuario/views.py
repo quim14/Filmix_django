@@ -7,16 +7,22 @@ from django.contrib.auth import authenticate, login
 from usuario.formulario_registrarse import formulario_registro
 from usuario.formulario_login import formulario_login
 
+from administracion.models import Pelicula
+
 
 def index(request):
     return render(request, "usuario/index.html")
 
 def cartelera(request):
-    peliculas_cartelera = []
-    return render(request, "usuario/cartelera.html", {"peliculas_cartelera": peliculas_cartelera})
+    peliculas = Pelicula.objects.filter(baja=False)
+    return render(request, "usuario/cartelera.html", {'peliculas':peliculas})
 
-def detalle_pelicula(request, pelicula):
-    return render(request, "usuario/detalle_pelicula.html")
+def detalle_pelicula(request, id_pelicula):
+    try:
+        pelicula = Pelicula.objects.get(pk = id_pelicula)
+    except Pelicula.DoesNotExist:
+        return render(request, 'usuario/index.html')
+    return render(request, "usuario/detalle_pelicula.html", {"pelicula":pelicula})
 
 
 def registrarse(request):

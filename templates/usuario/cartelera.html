@@ -7,14 +7,27 @@
     <section id="peliculas-section">
         <div class="container">
             <div class="titulo">
-                <h1>Cartelera de hoy</h1>
+                <h1>Cartelera</h1>
             </div>
-            <div class="peliculas"></div>
+            <div class="peliculas">
+                {% if peliculas|length > 0 %}
+
+                {% for pelicula in peliculas %}
+                    <div class="pelicula-item">
+                        <a href=" {% url "detalle_pelicula" pelicula.id %} " class="">
+                            <img src="..{{pelicula.poster.url}}" alt="">
+                            <div class="detalle-pelicula">
+                                <p class="pelicula-titulo">{{pelicula.nombre}}</p>
+                            </div>
+                        </a>    
+                    </div>
+                {% endfor %}
+
+                {% else %}
+                    <h1>NO HAY PELÍCULAS EN CARTELERA</h1>
+                {% endif %}
+            </div>
         </div>
     </section>
 
-    <script src="{% static 'usuario/js/cartelera.js' %}" defer></script>
-
 {% endblock main1 %}
-
-{% comment %} <script src="./js/cartelera.js"></script> {% endcomment %}

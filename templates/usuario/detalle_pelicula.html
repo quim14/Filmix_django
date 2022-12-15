@@ -6,8 +6,36 @@
 {% block main1 %}
     <section id="detalle-peliculas">
         <div class="container">
+            <div class="detalle-grid">
+
+
+                <div class="g-img">
+                    <img src="..{{pelicula.poster.url}}" alt="">
+                </div>
+                <div class="g-det">
+                    <h2>{{pelicula.nombre}}</h2>
+                </div>
+                <div class="g-det">
+                    <label for="">{{pelicula.descripcion}}</label>
+                </div>
+                <div class="g-det">
+                    ${horarios}
+                </div>
+                <div class="g-frame">
+                    <iframe 
+                        src= "{{pelicula.trailer}}"
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+
+
             <div class="volver">
-                <a href="{% url 'usuario/cartelera.html' %}"><i class="fa-solid fa-arrow-left"></i>Volver a cartelera</a>
+                <a href="{% url 'cartelera' %}"><i class="fa-solid fa-arrow-left"></i>Volver a cartelera</a>
             </div>
             <div class="detalle-grid">
             </div>
