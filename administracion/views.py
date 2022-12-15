@@ -13,8 +13,8 @@ from administracion.models import Funcion, Horario
 ########### P E L I C U L A S ##############
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_index(request):
-    # if not request.user.groups.filter(name="peliculas").exists():
-    #     return render(request,'usuario/index.html')
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     peliculas = Pelicula.objects.filter(baja=False)
     return render(request, "administracion/peliculas/peliculas.html", {'peliculas':peliculas})
 
@@ -43,6 +43,8 @@ def peliculas_agregar(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_editar(request, id_pelicula):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     try:
         pelicula = Pelicula.objects.get(pk = id_pelicula)
     except Pelicula.DoesNotExist:
@@ -84,6 +86,8 @@ def peliculas_editar(request, id_pelicula):
 
 @login_required(login_url=settings.LOGIN_URL)
 def peliculas_eliminar(request, id_pelicula):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     try:
         pelicula = Pelicula.objects.get(pk=id_pelicula)
     except Pelicula.DoesNotExist:
@@ -97,13 +101,15 @@ def peliculas_eliminar(request, id_pelicula):
 #################################
 @login_required(login_url=settings.LOGIN_URL)
 def funciones(request):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     funciones = Funcion.objects.all().order_by('-fecha')
     return render(request, "administracion/funciones/index.html", {'funciones': funciones,})
 
 @login_required(login_url=settings.LOGIN_URL)
 def funciones_agregar(request):
-    # if not request.user.groups.filter(name="administracion").exists():
-    #     return render(request,'usuario/index.html')
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     if (request.method == 'POST'):
         funcion_form = FuncionesForm(request.POST)
         # if funcion_form.is_valid():
@@ -125,6 +131,8 @@ def funciones_agregar(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def horarios_agregar(request, id_funcion):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     try:
         funcion = Funcion.objects.get(pk=id_funcion)
     except Funcion.DoesNotExist:
@@ -147,6 +155,8 @@ def horarios_agregar(request, id_funcion):
 
 @login_required(login_url=settings.LOGIN_URL)
 def horarios(request, id_funcion):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     try:
         funcion = Funcion.objects.get(pk=id_funcion)
     except Funcion.DoesNotExist:
@@ -158,6 +168,8 @@ def horarios(request, id_funcion):
 
 @login_required(login_url=settings.LOGIN_URL)
 def horarios_editar(request, id_funcion, id_horario):
+    if not request.user.groups.filter(name="administracion").exists():
+        return render(request,'usuario/index.html')
     try:
         hora = Horario.objects.get(pk = id_horario)
         funcion = Funcion.objects.get(pk=id_funcion)
