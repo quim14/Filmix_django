@@ -15,9 +15,12 @@ def cartelera(request):
     peliculas_cartelera = []
     return render(request, "usuario/cartelera.html", {"peliculas_cartelera": peliculas_cartelera})
 
-def detalle_pelicula(request, pelicula):
-    return render(request, "usuario/detalle_pelicula.html")
-
+def detalle_pelicula(request, id_pelicula):
+    try:
+        pelicula = Pelicula.objects.get(pk = id_pelicula)
+    except Pelicula.DoesNotExist:
+        return render(request, 'usuario/index.html')
+    return render(request, "usuario/detalle_pelicula.html", {"pelicula":pelicula})
 
 def registrarse(request):
     mensaje_exito = None
