@@ -1,0 +1,22 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+
+{% block titulo %} Editar pelicula {% endblock titulo %}
+
+{% block main %}
+<section class="d-flex justify-content-center">
+    <div class="row col-sm-10 card mb-5">
+
+        <form action="" id="form_pelicula" name="form_pelicula" method="POST" enctype="multipart/form-data">
+            <h3 class="text-center mt-3">Editar pelicula</h3>
+            {% csrf_token %}
+            {% comment %} {% include "administracion/peliculas/form.html" %} {% endcomment %}
+            {{pelicula_form}}
+            <div class="d-flex justify-content-center mb-3">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock main %}

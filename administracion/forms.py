@@ -80,6 +80,12 @@ class FuncionesForm(forms.Form):
         queryset=Pelicula.objects.filter(baja=False),
         widget=forms.Select(attrs={'class':'form-control'}))
 
+class HorarioForm(forms.Form):
+    hora = forms.TimeField(
+        label='Hora',
+        required=True,
+        widget=forms.DateInput(attrs={'class':'form-control', 'type':'time'})
+    )
 
 
 

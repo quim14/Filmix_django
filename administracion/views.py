@@ -2,9 +2,9 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from administracion.forms import PeliculaForm, PeliculaFormValidado, FuncionesForm
+from administracion.forms import PeliculaForm, PeliculaFormValidado, FuncionesForm, HorarioForm
 from administracion.models import Pelicula
-from administracion.models import Funcion
+from administracion.models import Funcion, Horario
 
 
 # Create your views here.
@@ -101,4 +101,59 @@ def funciones_agregar(request):
         funcion_form = FuncionesForm()
     return render(request, "administracion/funciones/agregar_funcion.html", {
         'funcion_form':funcion_form,
+    })
+
+#@login_required(login_url=settings.LOGIN_URL)
+def horarios_agregar(request, id_funcion):
+    try:
+        funcion = Funcion.objects.get(pk=id_funcion)
+    except Funcion.DoesNotExist:
+        return render(request, 'administracion/funciones/index.html')
+
+    if (request.method == 'POST'):
+        horario_form = HorarioForm(request.POST)
+        # if horario_form.is_valid():
+        hora = request.POST['hora']
+        nuevo_horario = Horario(hora=hora, funcion=funcion)
+        nuevo_horario.save()
+        return redirect('funciones')
+    
+    else:
+        horario_form = HorarioForm()
+    return render(request, "administracion/funciones/agregar_horario.html", {
+        'horario_form':horario_form, 'funcion':funcion,
+    })
+
+
+#@login_required(login_url=settings.LOGIN_URL)
+def horarios(request, id_funcion):
+    try:
+        funcion = Funcion.objects.get(pk=id_funcion)
+    except Funcion.DoesNotExist:
+        return render(request, 'administracion/funciones/index.html')
+    horas = Horario.objects.filter(funcion=funcion)
+    return render(request, "administracion/funciones/horarios.html", {
+        'funcion':funcion, 'horas':horas,
+    })
+
+#@login_required(login_url=settings.LOGIN_URL)
+def horarios_editar(request, id_funcion, id_horario):
+    try:
+        hora = Horario.objects.get(pk = id_horario)
+        funcion = Funcion.objects.get(pk=id_funcion)
+    except Pelicula.DoesNotExist:
+        return render(request, 'administracion/funciones/index')
+    if (request.method == 'POST'):
+    
+        horario_form = HorarioForm(request.POST, instance=hora)
+        # if pelicula_form.is_valid():
+        # pelicula_form.save()
+        hora = request.POST['hora']
+
+        return redirect('funciones')
+    
+    else:
+        horario_form = HorarioForm(instance=hora)
+    return render(request, "administracion/funciones/editar_horario.html", {
+        'horario_form':horario_form, 'funcion':funcion
     })

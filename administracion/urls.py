@@ -12,7 +12,10 @@ urlpatterns = [
 
 
     path('funciones/', views.funciones, name='funciones'),
-    path('funciones/agregar_funcion', views.funciones_agregar, name='funciones_agregar')
+    path('funciones/agregar_funcion', views.funciones_agregar, name='funciones_agregar'),
+    path('funciones/agregar_horario/<int:id_funcion>', views.horarios_agregar, name='horarios_agregar'),
+    path('funciones/editar_horario/<int:id_funcion>/<int:id_horario>', views.horarios_editar, name='horarios_editar'),
+    path('funciones/horarios/<int:id_funcion>', views.horarios, name='horarios'),
 ]
 
 if settings.DEBUG:
